@@ -6,7 +6,17 @@ public class LegActionScript : MonoBehaviour
 {
     [SerializeField]
     ActionControler acc;
+
+    private void Update()
+    {
+        if(Input.GetKeyDown("space"))
+        {
+            MoveLeg(0);
+        }
+    }
     
+    
+
     //コントローラーのボタンが押されたら発動、コントローラーのIDを見て判断
     public void MoveLeg(int controllerID)
     {
@@ -24,8 +34,7 @@ public class LegActionScript : MonoBehaviour
         }
         for(int i = 0; i < targetObj.Count; i++)
         {
-            //動き
-            Debug.Log("aaa");
+            targetObj[i].GetComponent<Animator>().SetTrigger("Up");
         }
     }
 }
