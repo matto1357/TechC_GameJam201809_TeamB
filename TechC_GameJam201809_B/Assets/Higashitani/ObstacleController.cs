@@ -11,13 +11,13 @@ public class ObstacleController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
+		gc = GameController.Instance;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         ObjInstance();
-        ObjMove();
+        ObjMove(1.0f);
 	}
 
     void ObjInstance()
@@ -26,17 +26,30 @@ public class ObstacleController : MonoBehaviour {
         {
             if (gc.sData.listObjects[i].spornNum == gc.legsCount)
             {
-                var o = Instantiate(gc.sData.listObjects[i].height);
+                GameObject gameObject = instanceObjects[(int)(gc.sData.listObjects[i].height)];
+                //switch (gc.sData.listObjects[i].height)
+                //{
+                //    case ObjectData.Height.LONG:
+                //        gameObject = instanceObjects[0];
+                //        return;
+                //    case ObjectData.Height.MIDLE:
+                //        gameObject = instanceObjects[1];
+                //        return;
+                //    case ObjectData.Height.SHORT:
+                //        gameObject = instanceObjects[2];
+                //        return;
+                //}
+                var o = Instantiate(gameObject);
                 fieldsObjects.Add(o);
             }
         }
     }
 
-    void ObjMove()
+    void ObjMove(float a)
     {
         foreach(GameObject f in fieldsObjects)
         {
-            f.transform.position -= new Vector3(gc.sData.speed, 0, 0);
+            f.transform.position -= new Vector3(gc.speed, 0, 0);
         }
     }
 

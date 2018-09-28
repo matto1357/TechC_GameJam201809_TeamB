@@ -11,7 +11,7 @@ public class GameController : SingletonMonoBehaviour<GameController>
     [SerializeField]
     public float speed;                     //ゲームスピード
     [SerializeField]
-    StageData sData;
+    public StageData sData;
 
     enum gameState                          //ゲームの状態がどこにいるか
     {
