@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+[ExecuteInEditMode]
 public class ParabolaController : MonoBehaviour
 {
 	/// <summary>
@@ -23,6 +24,7 @@ public class ParabolaController : MonoBehaviour
 	/// Animate
 	/// </summary>
 	public bool Animation = true;
+	public bool executeInEditMode = false;
 
 	//next parabola event
 	internal bool nextParbola = false;
@@ -31,18 +33,51 @@ public class ParabolaController : MonoBehaviour
 	protected float animationTime = float.MaxValue;
 
 	//gizmo
-	protected ParabolaFly gizmo;
+	protected ParabolaFly gizmo, gizmoUp, gizmoDown;
 
 	//draw
 	protected ParabolaFly parabolaFly;
 
-	int mCurrIndex;
+	int mCurrIndex, mPrevID;
 
 	void OnDrawGizmos()
 	{
+		int id = ParabolaRoot.GetInstanceID ();
+//		if (id != mPrevID) 
+//		{
+//			gizmo = new ParabolaFly(ParabolaRoot.transform);
+
+			Transform parent = ParabolaRoot.transform.parent.parent;
+			gizmoUp = new ParabolaFly(parent.GetChild(0).transform.GetChild(mCurrIndex));
+			gizmo = new ParabolaFly(parent.GetChild(1).transform.GetChild(mCurrIndex));
+			gizmoDown = new ParabolaFly(parent.GetChild(2).transform.GetChild(mCurrIndex));
+
+//			mPrevID = id;
+//		}
+
 		if (gizmo == null)
 		{
 			gizmo = new ParabolaFly(ParabolaRoot.transform);
+		}
+
+		if (gizmoUp != null) 
+		{
+			gizmoUp.RefreshTransforms(1f);
+			if ((gizmoUp.Points.Length - 1) % 2 != 0)
+				return;
+
+			int accurUp = 50;
+			Vector3 prevPosUp = gizmoUp.Points[0].position;
+			for (int c = 1; c <= accurUp; c++)
+			{
+				float currTime = c * gizmoUp.GetDuration() / accurUp;
+				Vector3 currPos = gizmoUp.GetPositionAtTime(currTime);
+				float mag = (currPos - prevPosUp).magnitude * 2;
+				Gizmos.color = new Color(0, mag, 0, 1);
+				Gizmos.DrawLine(prevPosUp, currPos);
+				Gizmos.DrawSphere(currPos, 0.01f);
+				prevPosUp = currPos;
+			}
 		}
 
 		gizmo.RefreshTransforms(1f);
@@ -60,6 +95,26 @@ public class ParabolaController : MonoBehaviour
 			Gizmos.DrawLine(prevPos, currPos);
 			Gizmos.DrawSphere(currPos, 0.01f);
 			prevPos = currPos;
+		}
+
+		if (gizmoDown != null) 
+		{
+			gizmoDown.RefreshTransforms(1f);
+			if ((gizmoDown.Points.Length - 1) % 2 != 0)
+				return;
+
+			int accurDown = 50;
+			Vector3 prevPosDown = gizmoDown.Points[0].position;
+			for (int c = 1; c <= accurDown; c++)
+			{
+				float currTime = c * gizmoDown.GetDuration() / accurDown;
+				Vector3 currPos = gizmoDown.GetPositionAtTime(currTime);
+				float mag = (currPos - prevPosDown).magnitude * 2;
+				Gizmos.color = new Color(0, 0, mag, 1);
+				Gizmos.DrawLine(prevPosDown, currPos);
+				Gizmos.DrawSphere(currPos, 0.01f);
+				prevPosDown = currPos;
+			}
 		}
 	}
 
@@ -106,13 +161,18 @@ public class ParabolaController : MonoBehaviour
 
 	}
 
-	public void SetNewParabola()
+	public void SetNewParabola(int dirIndex)
 	{
-		parabolaFly = new ParabolaFly(ParabolaParent.GetChild(mCurrIndex).transform);
+		parabolaFly = new ParabolaFly(ParabolaParent.GetChild(dirIndex).GetChild(mCurrIndex).transform);
 		mCurrIndex++;
 		if (mCurrIndex > ParabolaParent.childCount - 1) mCurrIndex = 0;
 
 		gizmo = null;
+	}
+
+	public void ResetCurrIndex()
+	{
+		mCurrIndex = 0;
 	}
 
 	public void FollowParabola()
