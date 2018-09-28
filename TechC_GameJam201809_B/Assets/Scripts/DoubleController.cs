@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class DoubleController : MonoBehaviour 
 {
-<<<<<<< HEAD
 	Rigidbody mRigidbody;
 	float mMovingTime;
 	bool mIsHit = false;
     [SerializeField]
     private LegActionScript legScript;
-=======
 	public float upJump = 10.0f;
 	public float normalJump = 5.0f;
 	public float downJump = 2.5f;
@@ -25,18 +23,14 @@ public class DoubleController : MonoBehaviour
 		DOWN
 	}
 	JumpPress mJumpPress = JumpPress.NONE;
->>>>>>> origin/Lee
 
-	Rigidbody mRigidbody;
+	//Rigidbody mRigidbody;
 
 	void Start()
 	{
 		mRigidbody = gameObject.GetComponent<Rigidbody> ();
-<<<<<<< HEAD
-		mParabolaController = GetComponent<ParabolaController> ();
+		//mParabolaController = GetComponent<ParabolaController> ();
         legScript = GetComponent<LegActionScript>();
-=======
->>>>>>> origin/Lee
 	}
 
 	void Update () 
@@ -74,8 +68,7 @@ public class DoubleController : MonoBehaviour
 				Debug.Log ("P1 Button A");
 			}
 		}
-
-<<<<<<< HEAD
+        
 		// 下に行く
 		if (verticalP1 > 0 || verticalDpadP1 < 0) 
 		{
@@ -102,20 +95,17 @@ public class DoubleController : MonoBehaviour
         // ----------------------------------------------------------------------
 
         float horizontalP2 = Input.GetAxis ("HorizontalXBoxP2");
-=======
 		// ----------------------------------------------------------------------
 		// ------------------------------ P2 ------------------------------------
 		// ----------------------------------------------------------------------
 
-		float horizontalP2 = Input.GetAxis ("HorizontalXBoxP2");
->>>>>>> origin/Lee
+		//float horizontalP2 = Input.GetAxis ("HorizontalXBoxP2");
 		float verticalP2 = Input.GetAxis ("VerticalXBoxP2");
 		float horizontalDpadP2 = Input.GetAxis ("HorizontalDPadXBoxP2");
 		float verticalDpadP2 = Input.GetAxis ("VerticalDpadXBoxP2");
 
 		if (mIsP2Hit) 
 		{
-<<<<<<< HEAD
 			Debug.Log ("P2 下");
 		}
 		//　上に行く
@@ -136,8 +126,8 @@ public class DoubleController : MonoBehaviour
 
         if (Input.GetKeyDown (KeyCode.Space)) 
 		{
-			mParabolaController.SetNewParabola ();
-			mParabolaController.FollowParabola ();
+			//mParabolaController.SetNewParabola ();
+			//mParabolaController.FollowParabola ();
 		}
 
 		if (mIsHit) 
@@ -153,7 +143,6 @@ public class DoubleController : MonoBehaviour
 //			mIsHit = false;
 				//			mRigidbody.AddForce (new Vector3(0.5f, 0.5f, 0) * 800.0f);
 				//			mIsHit = false;
-=======
 			if ( (verticalDpadP2 > 0　|| Input.GetKey(KeyCode.UpArrow)) && (Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.KeypadEnter)) )
 			{
 				// 上　+　Aボタン
@@ -174,7 +163,6 @@ public class DoubleController : MonoBehaviour
 				mJumpPress = JumpPress.NORMAL;
 				Debug.Log ("P2 Button A");
 			}
->>>>>>> origin/Lee
 		}
 	}
 

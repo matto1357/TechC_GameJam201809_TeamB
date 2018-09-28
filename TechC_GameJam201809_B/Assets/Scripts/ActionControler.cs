@@ -55,7 +55,8 @@ public class ActionControler : MonoBehaviour {
         {
             case 0:
                 obj = Instantiate(octopus, pos, Quaternion.identity) as GameObject;
-                obj.transform.rotation = Quaternion.Euler()
+                var rot = obj.transform.rotation;
+                obj.transform.rotation = Quaternion.Euler(rot.x, 100, rot.z);
                 octopusLeg.Add(obj);
                 if (GameController.Instance.legsCount >= TextDeleteLegCount) break;
                 textObj = Instantiate(OctopusText, textPos, Quaternion.identity);
