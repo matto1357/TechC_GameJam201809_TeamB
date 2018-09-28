@@ -15,7 +15,22 @@ public class DoubleController : MonoBehaviour
 
 	bool mIsP1Hit, mIsP2Hit;
 
-	enum JumpPress
+
+    //Inspectorで好きなボタンに変えられるようにする
+    [SerializeField]
+    public KeyCode key1A;  // 1Pのアクションボタン
+    [SerializeField]
+    public KeyCode key1U;  // 1Pの↑ボタン
+    [SerializeField]
+    public KeyCode key1D;  // 1Pの↓ボタン
+    [SerializeField]
+    public KeyCode key2A;  // 2Pのアクションボタン
+    [SerializeField]
+    public KeyCode key2U;  // 2Pの↑ボタン
+    [SerializeField]
+    public KeyCode key2D;  // 2Pの↓ボタン
+
+    enum JumpPress
 	{
 		NONE = 0,
 		NORMAL,
@@ -35,10 +50,11 @@ public class DoubleController : MonoBehaviour
 
 	void Update () 
 	{
+        Comand();
 		// ----------------------------------------------------------------------
 		// ------------------------------ P1 ------------------------------------
 		// ----------------------------------------------------------------------
-
+        /*
 		float horizontalP1 = Input.GetAxis ("HorizontalXBoxP1");
 		float verticalP1 = Input.GetAxis ("VerticalXBoxP1");
 		float horizontalDpadP1 = Input.GetAxis ("HorizontalDPadXBoxP1");
@@ -129,7 +145,7 @@ public class DoubleController : MonoBehaviour
 			//mParabolaController.SetNewParabola ();
 			//mParabolaController.FollowParabola ();
 		}
-
+        
 		if (mIsHit) 
 		{
 //			Debug.Log ("AAA");
@@ -163,10 +179,69 @@ public class DoubleController : MonoBehaviour
 				mJumpPress = JumpPress.NORMAL;
 				Debug.Log ("P2 Button A");
 			}
+            
 		}
+        */
 	}
+    void Comand()
+    {
 
-	void FixedUpdate()
+        if (mIsP1Hit)
+        {
+            //各コマンドボタンの処理
+            if (Input.GetKeyDown(key1A))
+            {
+                // Aボタン
+                mIsP1Hit = false;
+                mJumpPress = JumpPress.NORMAL;
+                Debug.Log("P1 Button A");
+            }
+
+            if (Input.GetKey(key1U) && Input.GetKeyDown(key1A))
+            {
+
+                // 上　+　Aボタン
+                mIsP1Hit = false;
+                mJumpPress = JumpPress.UP;
+                Debug.Log("key1U!");
+            }
+
+            if (Input.GetKey(key1D) && Input.GetKeyDown(key1A))
+            {
+
+                // 下　+　Aボタン
+                mIsP1Hit = false;
+                mJumpPress = JumpPress.DOWN;
+                Debug.Log("key1D!");
+            }
+
+            if (Input.GetKeyDown(key2A))
+            {
+                mIsP2Hit = false;
+                mJumpPress = JumpPress.NORMAL;
+                Debug.Log("key2A!");
+            }
+
+            if (Input.GetKey(key2U) && Input.GetKeyDown(key2A))
+            {
+                // 上　+　Aボタン
+                mIsP2Hit = false;
+                mJumpPress = JumpPress.UP;
+                Debug.Log("key2U!");
+            }
+
+            if (Input.GetKey(key2D) && Input.GetKeyDown(key2A))
+            {
+
+                // 下　+　Aボタン
+                mIsP2Hit = false;
+                mJumpPress = JumpPress.DOWN;
+                Debug.Log("key2D!");
+            }
+        }
+    }
+
+    void FixedUpdate()
 	{
 		if (mJumpPress != JumpPress.NONE) 
 		{
