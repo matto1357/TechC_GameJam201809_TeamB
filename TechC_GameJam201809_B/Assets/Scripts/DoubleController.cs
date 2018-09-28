@@ -7,6 +7,8 @@ public class DoubleController : MonoBehaviour
 	Rigidbody mRigidbody;
 	float mMovingTime;
 	bool mIsHit = false;
+    [SerializeField]
+    private LegActionScript legScript;
 
 	Vector3 mInitialPos, mEndPos;
 	ParabolaController mParabolaController;
@@ -15,6 +17,7 @@ public class DoubleController : MonoBehaviour
 	{
 		mRigidbody = gameObject.GetComponent<Rigidbody> ();
 		mParabolaController = GetComponent<ParabolaController> ();
+        legScript = GetComponent<LegActionScript>();
 	}
 
 	void Update () 
@@ -50,20 +53,21 @@ public class DoubleController : MonoBehaviour
 			Debug.Log ("P1 上");
 		}
 
-//		if (Input.GetKeyDown(KeyCode.Joystick1Button1)) 
-//		{
-//			Debug.Log ("P1 Button A");
-//		}
-//		else if (Input.GetKeyDown(KeyCode.Joystick1Button2)) 
-//		{
-//			Debug.Log ("P1 Button B");
-//		}
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+        {
+            Debug.Log("P1 Button A");
+        }
+        else if (Input.GetKeyDown(KeyCode.Joystick1Button2))
+        {
+            Debug.Log("P1 Button B");
+            legScript.MoveLeg(0);
+        }
 
-		// ----------------------------------------------------------------------
-		// ------------------------------ P2 ------------------------------------
-		// ----------------------------------------------------------------------
+        // ----------------------------------------------------------------------
+        // ------------------------------ P2 ------------------------------------
+        // ----------------------------------------------------------------------
 
-		float horizontalP2 = Input.GetAxis ("HorizontalXBoxP2");
+        float horizontalP2 = Input.GetAxis ("HorizontalXBoxP2");
 		float verticalP2 = Input.GetAxis ("VerticalXBoxP2");
 		float horizontalDpadP2 = Input.GetAxis ("HorizontalDPadXBoxP2");
 		float verticalDpadP2 = Input.GetAxis ("VerticalDpadXBoxP2");
@@ -90,16 +94,17 @@ public class DoubleController : MonoBehaviour
 			Debug.Log ("P2 上");
 		}
 
-//		if (Input.GetKeyDown(KeyCode.Joystick2Button0)) 
-//		{
-//			Debug.Log ("P2 Button A");
-//		}
-//		else if (Input.GetKeyDown(KeyCode.Joystick2Button1)) 
-//		{
-//			Debug.Log ("P2 Button B");
-//		}
+        if (Input.GetKeyDown(KeyCode.Joystick2Button0))
+        {
+            Debug.Log("P2 Button A");
+        }
+        else if (Input.GetKeyDown(KeyCode.Joystick2Button1))
+        {
+            Debug.Log("P2 Button B");
+            legScript.MoveLeg(1);
+        }
 
-		if (Input.GetKeyDown (KeyCode.Space)) 
+        if (Input.GetKeyDown (KeyCode.Space)) 
 		{
 			mParabolaController.SetNewParabola ();
 			mParabolaController.FollowParabola ();
