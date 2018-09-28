@@ -15,6 +15,8 @@ public class ActionControler : MonoBehaviour {
 
     private void Update()
     {
+
+        /*
         if (Input.GetMouseButtonDown(0))
         {
             //ButtonInstruction(GameObject.Find("Octopus"));
@@ -25,6 +27,7 @@ public class ActionControler : MonoBehaviour {
             //ButtonInstruction(GameObject.Find("KillerWhale"));
             InstanceLegObject();
         }
+        */
     }
 
     //ABどちらのボタンを押すかの判定。いまのところは文字列をreturnする
@@ -64,8 +67,8 @@ public class ActionControler : MonoBehaviour {
                 break;
         }
         obj.transform.SetParent(parentObj.transform);
-        Debug.Log(octopusLeg[0]);
-        Debug.Log(killerWhaleTailFin.Count);
+        //Debug.Log(octopusLeg[0]);
+        //Debug.Log(killerWhaleTailFin.Count);
     }
 
 

@@ -8,7 +8,7 @@ public class ObjectDelete : MonoBehaviour {
     ActionControler actionControler;
 	// Use this for initialization
 	void Start () {
-        obj = GameObject.Find("GameObject");
+        obj = GameObject.Find("Manager");
         actionControler = obj.GetComponent<ActionControler>();
 	}
 	
