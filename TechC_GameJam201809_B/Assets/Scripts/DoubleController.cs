@@ -15,8 +15,17 @@ public class DoubleController : MonoBehaviour
 
 	bool mIsP1Hit, mIsP2Hit;
 
+    [SerializeField] public KeyCode Joystick1upArrow;
+    [SerializeField] public KeyCode Joystick1DownArrow;
+    [SerializeField] public KeyCode Joystick1Button1;
+    [SerializeField] public KeyCode Joystick1Space;
+    [SerializeField] public KeyCode Joystick2upArrow;
+    [SerializeField] public KeyCode Joystick2DownArrow;
+    [SerializeField] public KeyCode Joystick2Button0;
+    [SerializeField] public KeyCode Joystick2KeypadEnter;
 
-    //Inspectorで好きなボタンに変えられるようにする
+
+    //キーボードをInspectorで好きなボタンに変えられるようにする
     [SerializeField]
     public KeyCode key1A;  // 1Pのアクションボタン
     [SerializeField]
@@ -54,7 +63,7 @@ public class DoubleController : MonoBehaviour
 		// ----------------------------------------------------------------------
 		// ------------------------------ P1 ------------------------------------
 		// ----------------------------------------------------------------------
-        /*
+        
 		float horizontalP1 = Input.GetAxis ("HorizontalXBoxP1");
 		float verticalP1 = Input.GetAxis ("VerticalXBoxP1");
 		float horizontalDpadP1 = Input.GetAxis ("HorizontalDPadXBoxP1");
@@ -62,21 +71,21 @@ public class DoubleController : MonoBehaviour
 
 		if (mIsP1Hit) 
 		{
-			if ( (verticalDpadP1 > 0　|| Input.GetKey(KeyCode.UpArrow)) && (Input.GetKeyDown (KeyCode.Joystick1Button1) || Input.GetKeyDown (KeyCode.Space)) ) 
+			if ( (verticalDpadP1 > 0　|| Input.GetKey(Joystick1upArrow)) && (Input.GetKeyDown (Joystick1Button1) || Input.GetKeyDown (Joystick1Space)) ) 
 			{
 				// 上　+　Aボタン
 				mIsP1Hit = false;
 				mJumpPress = JumpPress.UP;
 				Debug.Log ("up A button");
 			}
-			else if ( (verticalDpadP1 < 0 || Input.GetKey(KeyCode.DownArrow)) && (Input.GetKeyDown (KeyCode.Joystick1Button1) || Input.GetKeyDown (KeyCode.Space)) ) 
+			else if ( (verticalDpadP1 < 0 || Input.GetKey(Joystick1DownArrow)) && (Input.GetKeyDown (Joystick1Button1) || Input.GetKeyDown (Joystick1Space)) ) 
 			{
 				// 下　+　Aボタン
 				mIsP1Hit = false;
 				mJumpPress = JumpPress.DOWN;
 				Debug.Log ("down A button");
 			}
-			else if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKeyDown(KeyCode.Space)) 
+			else if (Input.GetKeyDown(Joystick1Button1) || Input.GetKeyDown(Joystick1Space)) 
 			{
 				// Aボタン
 				mIsP1Hit = false;
@@ -159,21 +168,21 @@ public class DoubleController : MonoBehaviour
 //			mIsHit = false;
 				//			mRigidbody.AddForce (new Vector3(0.5f, 0.5f, 0) * 800.0f);
 				//			mIsHit = false;
-			if ( (verticalDpadP2 > 0　|| Input.GetKey(KeyCode.UpArrow)) && (Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.KeypadEnter)) )
+			if ( (verticalDpadP2 > 0　|| Input.GetKey(Joystick2upArrow)) && (Input.GetKeyDown (Joystick2Button0) || Input.GetKeyDown (Joystick2KeypadEnter)) )
 			{
 				// 上　+　Aボタン
 				mIsP2Hit = false;
 				mJumpPress = JumpPress.UP;
 				Debug.Log ("up A button");
 			}
-			else if ( (verticalDpadP2 < 0 || Input.GetKey(KeyCode.DownArrow)) &&  (Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.KeypadEnter)) )
+			else if ( (verticalDpadP2 < 0 || Input.GetKey(Joystick2DownArrow)) &&  (Input.GetKeyDown (Joystick2Button0) || Input.GetKeyDown (Joystick2KeypadEnter)) )
 			{
 				// 下　+　Aボタン
 				mIsP2Hit = false;
 				mJumpPress = JumpPress.DOWN;
 				Debug.Log ("down A button");
 			}
-			else if (Input.GetKeyDown(KeyCode.Joystick2Button0) || Input.GetKeyDown(KeyCode.KeypadEnter)) 
+			else if (Input.GetKeyDown(Joystick2Button0) || Input.GetKeyDown(Joystick2KeypadEnter)) 
 			{
 				mIsP2Hit = false;
 				mJumpPress = JumpPress.NORMAL;
@@ -181,7 +190,7 @@ public class DoubleController : MonoBehaviour
 			}
             
 		}
-        */
+        
 	}
     void Comand()
     {
