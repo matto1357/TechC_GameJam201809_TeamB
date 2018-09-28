@@ -10,6 +10,7 @@ public class ObjectData
         SHORT,
         MIDLE,
         LONG,
+        CEILING,
     }
     public Height height;
     public int spornNum;
