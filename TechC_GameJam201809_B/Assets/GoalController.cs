@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FloorCollider : MonoBehaviour {
+public class GoalController : MonoBehaviour {
+
     [SerializeField]
     string ballName;
 
@@ -18,9 +19,9 @@ public class FloorCollider : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.name == ballName)
-        {
-
-        }
+        if (other.name != ballName) return;
+        Destroy(other.GetComponent<Rigidbody>());
+        GameController.Instance.GameClear();
     }
+
 }

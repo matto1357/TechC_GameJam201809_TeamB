@@ -35,8 +35,6 @@ public class ActionControler : MonoBehaviour {
     }
     private void Update()
     {
-     
-        
         if (Input.GetMouseButtonDown(0))
         {
             isPlay = false;
@@ -55,7 +53,7 @@ public class ActionControler : MonoBehaviour {
         {
             case 0:
                 obj = Instantiate(octopus, pos, Quaternion.identity) as GameObject;
-                obj.transform.rotation = Quaternion.Euler()
+                //obj.transform.rotation = Quaternion.Euler();
                 octopusLeg.Add(obj);
                 if (GameController.Instance.legsCount >= TextDeleteLegCount) break;
                 textObj = Instantiate(OctopusText, textPos, Quaternion.identity);
@@ -92,7 +90,6 @@ public class ActionControler : MonoBehaviour {
 
     public void InstenceWall()
     {
-        
         if (GameController.Instance.legsCount % 5 != 0) return;
         int rnd = Random.Range(0, 2);
         Vector3 textPos = pos;

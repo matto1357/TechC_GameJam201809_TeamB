@@ -8,8 +8,11 @@ public class ObstacleController : MonoBehaviour {
     List<GameObject> fieldsObjects = new List<GameObject>();
 
     GameController gc;
-
+    [SerializeField]
     Transform spornPoint;
+    [SerializeField]
+    GameObject goalObj;
+    bool isGoal;
 
     // Use this for initialization
     void Start () {
@@ -19,25 +22,31 @@ public class ObstacleController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         ObjInstance();
-        ObjMove(1.0f);
+        ObjMove();
 	}
 
     void ObjInstance()
     {
+        if (gc.legsCount == gc.sData.stageRange && !isGoal)
+        {
+            isGoal = true;
+            Instantiate(goalObj);
+            return;
+        }
         for (int i = 0; i < gc.sData.listObjects.Count; i++)
         {
             if (gc.sData.listObjects[i].spornNum == gc.legsCount)
             {
                 if (gc.sData.listObjects[i].isSporn) return;
                 GameObject gameObject = instanceObjects[(int)(gc.sData.listObjects[i].height)];
-                var o = Instantiate(gameObject);
+                var o = Instantiate(gameObject,spornPoint.position,Quaternion.identity);
                 fieldsObjects.Add(o);
                 gc.sData.listObjects[i].isSporn = true;
             }
         }
     }
 
-    void ObjMove(float a)
+    void ObjMove()
     {
         foreach(GameObject f in fieldsObjects)
         {

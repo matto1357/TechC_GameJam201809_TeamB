@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GetKey : MonoBehaviour {
+public class GetKey : SingletonMonoBehaviour<GetKey> {
 
     //Inspectorで好きなボタンに変えられるようにする
     [SerializeField]
@@ -30,31 +30,37 @@ public class GetKey : MonoBehaviour {
         if (Input.GetKeyDown(key1A))
         {
             Debug.Log("key1A!");
+            LegActionScript.Instance.MoveLeg(0,ActionPower.Midle);
         }
 
         if (Input.GetKey(key1U) && Input.GetKeyDown(key1A))
         {
             Debug.Log("key1U!");
+            LegActionScript.Instance.MoveLeg(0,ActionPower.Height);
         }
 
         if (Input.GetKey(key1D) && Input.GetKeyDown(key1A))
         {
             Debug.Log("key1D!");
+            LegActionScript.Instance.MoveLeg(0,ActionPower.Low);
         }
 
         if (Input.GetKeyDown(key2A))
         {
             Debug.Log("key2A!");
+            LegActionScript.Instance.MoveLeg(1,ActionPower.Midle);
         }
 
         if (Input.GetKey(key2U) && Input.GetKeyDown(key2A))
         {
             Debug.Log("key2U!");
+            LegActionScript.Instance.MoveLeg(1,ActionPower.Height);
         }
 
         if (Input.GetKey(key2D) && Input.GetKeyDown(key2A))
         {
             Debug.Log("key2D!");
+            LegActionScript.Instance.MoveLeg(1,ActionPower.Low);
         }
     }
     

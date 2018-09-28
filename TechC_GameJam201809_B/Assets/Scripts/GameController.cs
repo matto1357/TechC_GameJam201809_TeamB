@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : SingletonMonoBehaviour<GameController>
 {
@@ -15,14 +16,14 @@ public class GameController : SingletonMonoBehaviour<GameController>
 
     bool[] isStanby = new bool[2];
 
-    enum GameState                          //ゲームの状態がどこにいるか
+    public enum GameState                          //ゲームの状態がどこにいるか
     {
         Title = 0,
         Game,
         Result
     }
     [SerializeField]
-    private GameState _gameState = 0;       //いーなむ
+    public GameState _gameState = 0;       //いーなむ
 
 	// Use this for initialization
 	void Start ()
@@ -33,6 +34,8 @@ public class GameController : SingletonMonoBehaviour<GameController>
 	// Update is called once per frame
 	void Update ()
     {
+        speed = 2.9f *Time.deltaTime;
+
         // テストコード
         if (Input.GetKeyDown(KeyCode.Q)) isStanby[0] = true;
         if (Input.GetKeyDown(KeyCode.W)) isStanby[1] = true;
@@ -52,6 +55,14 @@ public class GameController : SingletonMonoBehaviour<GameController>
                 return;
 
             case GameState.Result:
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    _gameState = GameState.Title;
+                    // 現在のScene名を取得する
+                    Scene loadScene = SceneManager.GetActiveScene();
+                    // Sceneの読み直し
+                    SceneManager.LoadScene(loadScene.name);
+                }
                 return;
 
         }
@@ -78,18 +89,19 @@ public class GameController : SingletonMonoBehaviour<GameController>
 
     public void GameOver()
     {
-        
+        Result("GameOver…");
     }
 
     public void GameClear()
     {
-
+        Result("GameClear");
     }
 
-    void Result()
+    void Result(string text)
     {
         _gameState = GameState.Result;
         ResultController.Instance.IsStart = true;
+        ResultController.Instance.TextChange(text);
     }
 
 }
