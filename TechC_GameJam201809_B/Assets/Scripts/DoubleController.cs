@@ -94,13 +94,13 @@ public class DoubleController : MonoBehaviour
 			Debug.Log ("P2 上");
 		}
 
-        if (Input.GetKeyDown(KeyCode.Joystick2Button0))
+        if (Input.GetKeyDown(KeyCode.Joystick2Button1))
         {
-            Debug.Log("P2 Button A");
+            Debug.Log("P2 Button 1");
         }
-        else if (Input.GetKeyDown(KeyCode.Joystick2Button1))
+        else if (Input.GetKeyDown(KeyCode.Joystick2Button2))
         {
-            Debug.Log("P2 Button B");
+            Debug.Log("P2 Button 2");
             legScript.MoveLeg(1);
         }
 

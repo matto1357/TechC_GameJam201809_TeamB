@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveObj : MonoBehaviour {
-
-    GameObject gameObject;
-    GameController gameController;
+    
+    [SerializeField]
+    private GameController gameController;
 
 	// Use this for initialization
 	void Start () {
-        gameObject = GameObject.Find("Manager");
-        gameController = gameObject.GetComponent<GameController>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        this.transform.position += new Vector3(/*GameControllerのspeed変数*/-0.05f,0,0);
+        this.transform.position += new Vector3(gameController.speed / -60f, 0, 0);
 	}
 }

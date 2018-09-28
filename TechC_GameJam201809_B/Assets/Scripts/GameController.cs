@@ -6,8 +6,8 @@ public class GameController : SingletonMonoBehaviour<GameController>
 {
     //変数エリア
     private float gameTime = 120f;          //ゲーム残り時間
-    private int score = 0;                  //スコア
-    public int legsCount = 0;               //現在の足の本数
+    public int legsCount = 0;               //現在生成が何本目か
+    public int scoreCount = 0;              //通過した足が何本目か
     [SerializeField]
     public float speed;                     //ゲームスピード
     [SerializeField]
@@ -66,23 +66,18 @@ public class GameController : SingletonMonoBehaviour<GameController>
         }
     }
 
-    public void AddScore(int value = 1)     //スコア加算
+    public void AddLeg(int value = 1)     //スコア加算
     {
-        score += value;
+        legsCount += value;
     }
 
-    public void DeleteScore(int value = 1)  //スコア減算
+    public void AddScore(int value = 1)
     {
-        score -= value;
-        if(score < 0)
-        {
-            score = 0;
-        }
+        scoreCount += value;
     }
 
     public void GameOver()
     {
-
         
     }
 

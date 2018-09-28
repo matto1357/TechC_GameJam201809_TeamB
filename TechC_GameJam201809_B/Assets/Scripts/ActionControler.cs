@@ -7,7 +7,7 @@ public class ActionControler : MonoBehaviour {
     [SerializeField]private GameObject octopus;//たこ足
     [SerializeField]private GameObject killerWhale;//シャチ尾びれ
     [SerializeField]private GameObject parentObj;//親になる予定
-    [SerializeField]private Vector3 pos;//インスタンス化するpos 
+    [SerializeField]private Vector3 pos;//インスタンス化するpos
 
     public List<GameObject> octopusLeg;
     public List<GameObject> killerWhaleTailFin;
@@ -17,6 +17,9 @@ public class ActionControler : MonoBehaviour {
 
     [SerializeField] float betweenPos;
     private bool isPlay = true;
+
+    [SerializeField]
+    private GameController gc;
 
     private void Start()
     {
@@ -65,7 +68,6 @@ public class ActionControler : MonoBehaviour {
     public void InstanceLegObject()
     {
         int rnd = Random.Range(0,2);
-        
         switch (rnd)
         {
             case 0:
@@ -80,6 +82,7 @@ public class ActionControler : MonoBehaviour {
         obj.transform.SetParent(parentObj.transform);
         //Debug.Log(octopusLeg[0]);
         //Debug.Log(killerWhaleTailFin.Count);
+        gc.AddLeg();
     }
     
     IEnumerator InstanceLegFrequency()
@@ -89,7 +92,6 @@ public class ActionControler : MonoBehaviour {
             if (/*isPlay*/!isPlay) break;
             if(instancePosObj.transform.position.x - obj.transform.position.x >= betweenPos)
             {
-
                 InstanceLegObject();
             }
 
