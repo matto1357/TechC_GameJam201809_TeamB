@@ -7,7 +7,7 @@ public class ActionControler : MonoBehaviour {
     [SerializeField]private GameObject octopus;//たこ足
     [SerializeField]private GameObject killerWhale;//シャチ尾びれ
     [SerializeField]private GameObject parentObj;//親になる予定
-    [SerializeField]private Vector3 pos;//インスタンス化するpos 
+    [SerializeField]private Vector3 pos;//インスタンス化するpos
 
     [SerializeField] private GameObject OctopusText;//たこ足のためのtext
     [SerializeField] private GameObject KillerWhaleText;//シャチ尾びれのためのtext
@@ -20,6 +20,9 @@ public class ActionControler : MonoBehaviour {
 
     [SerializeField] float betweenPos;
     private bool isPlay = true;
+
+    [SerializeField]
+    private GameController gc;
 
     private void Start()
     {
@@ -80,6 +83,7 @@ public class ActionControler : MonoBehaviour {
                 if (GameController.Instance.legsCount >= 10) break;
                 textObj = Instantiate(OctopusText, textPos, Quaternion.identity);
                 textObj.transform.SetParent(parentObj.transform);
+                textObj.transform.SetParent(obj.transform);
                 break;
             case 1:
                 obj = Instantiate(killerWhale, pos, Quaternion.identity) as GameObject;
@@ -87,6 +91,7 @@ public class ActionControler : MonoBehaviour {
                 if (GameController.Instance.legsCount >= 10) break;
                 textObj = Instantiate(KillerWhaleText, textPos, Quaternion.identity);
                 textObj.transform.SetParent(parentObj.transform);
+                textObj.transform.SetParent(obj.transform);
                 break;
         }
         obj.transform.SetParent(parentObj.transform);
@@ -102,7 +107,6 @@ public class ActionControler : MonoBehaviour {
             if (/*isPlay*/!isPlay) break;
             if(instancePosObj.transform.position.x - obj.transform.position.x >= betweenPos)
             {
-
                 InstanceLegObject();
             }
 
