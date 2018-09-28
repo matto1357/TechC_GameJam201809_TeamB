@@ -4,24 +4,27 @@ using UnityEngine;
 
 public class BackGround : MonoBehaviour {
 
-    //minの座標からmaxの座標まで背景が動く
+    //minからmaxまでの座標間で動く
     float min = -7;
     float max = 7;
 
-    //背景の動くスピード（調整可）
+    //背景の高さ
     [SerializeField]
-    public float speed;
-	
-	// Update is called once per frame
-	void Update () {
+    [Range(0,100)]public float height;
+    
 
-        TransPostion();
+
+    // Update is called once per frame
+    void Update () {
+
+        TransPostion(0);
+        
 	}
 
-    public void TransPostion()
-    {
-
-        transform.position = new Vector2(0, Mathf.Lerp(min, max, Time.time * speed));
-
+    public void TransPostion(float Height)
+    { 
+        this.transform.position = new Vector3(0, Mathf.Lerp(min, max, Height / 100) ,0);
+        //this.transform.position = new Vector3(0, Mathf.Sin(Time.time) * Height, 0);
     }
+
 }
