@@ -9,6 +9,9 @@ public class ActionControler : MonoBehaviour {
     [SerializeField]private GameObject parentObj;//親になる予定
     [SerializeField]private Vector3 pos;//インスタンス化するpos 
 
+    [SerializeField] private GameObject OctopusText;//たこ足のためのtext
+    [SerializeField] private GameObject KillerWhaleText;//シャチ尾びれのためのtext
+
     public List<GameObject> octopusLeg;
     public List<GameObject> killerWhaleTailFin;
 
@@ -49,11 +52,11 @@ public class ActionControler : MonoBehaviour {
         switch (obj.tag)
         {
             case "Octopus":
-                str = "A";
+                str = "key1";
 
                 break;
             case "KillerWhale":
-                str = "B";
+                str = "key2";
 
                 break;
         }
@@ -65,19 +68,29 @@ public class ActionControler : MonoBehaviour {
     public void InstanceLegObject()
     {
         int rnd = Random.Range(0,2);
-        
+
+        Vector3 textPos = pos;
+        textPos.y = textPos.y + 3f;
+        GameObject textObj = null;
         switch (rnd)
         {
             case 0:
                 obj = Instantiate(octopus, pos, Quaternion.identity) as GameObject;
                 octopusLeg.Add(obj);
+                if (GameController.Instance.legsCount >= 10) break;
+                textObj = Instantiate(OctopusText, textPos, Quaternion.identity);
+                textObj.transform.SetParent(parentObj.transform);
                 break;
             case 1:
                 obj = Instantiate(killerWhale, pos, Quaternion.identity) as GameObject;
                 killerWhaleTailFin.Add(obj);
+                if (GameController.Instance.legsCount >= 10) break;
+                textObj = Instantiate(KillerWhaleText, textPos, Quaternion.identity);
+                textObj.transform.SetParent(parentObj.transform);
                 break;
         }
         obj.transform.SetParent(parentObj.transform);
+        GameController.Instance.legsCount++;
         //Debug.Log(octopusLeg[0]);
         //Debug.Log(killerWhaleTailFin.Count);
     }
