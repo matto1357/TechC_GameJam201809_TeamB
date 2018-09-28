@@ -79,10 +79,10 @@ public class ActionControler : MonoBehaviour {
         {
             case 0:
                 obj = Instantiate(octopus, pos, Quaternion.identity) as GameObject;
+                obj.transform.rotation = Quaternion.Euler()
                 octopusLeg.Add(obj);
                 if (GameController.Instance.legsCount >= 10) break;
                 textObj = Instantiate(OctopusText, textPos, Quaternion.identity);
-                textObj.transform.SetParent(parentObj.transform);
                 textObj.transform.SetParent(obj.transform);
                 break;
             case 1:
@@ -90,7 +90,6 @@ public class ActionControler : MonoBehaviour {
                 killerWhaleTailFin.Add(obj);
                 if (GameController.Instance.legsCount >= 10) break;
                 textObj = Instantiate(KillerWhaleText, textPos, Quaternion.identity);
-                textObj.transform.SetParent(parentObj.transform);
                 textObj.transform.SetParent(obj.transform);
                 break;
         }
