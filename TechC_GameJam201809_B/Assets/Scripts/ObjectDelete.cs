@@ -6,9 +6,11 @@ public class ObjectDelete : MonoBehaviour {
 
     GameObject obj;
     ActionControler actionControler;
+
+    [SerializeField] private float deletePos;
 	// Use this for initialization
 	void Start () {
-        obj = GameObject.Find("GameObject");
+        obj = GameObject.Find("Manager");
         actionControler = obj.GetComponent<ActionControler>();
 	}
 	
@@ -19,7 +21,7 @@ public class ObjectDelete : MonoBehaviour {
     //このobjectをdeleteする関数
     private void DeleteThisObject()
     {
-        if(this.transform.position.x <= -10)//position.xが一定位置を過ぎたら
+        if(this.transform.position.x <= deletePos)//position.xが一定位置を過ぎたら
         {
 
             switch (this.gameObject.tag)
