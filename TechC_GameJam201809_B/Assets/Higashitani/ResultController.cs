@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class TitleController : SingletonMonoBehaviour<TitleController> {
-
+public class ResultController : SingletonMonoBehaviour<ResultController> {
     [SerializeField]
-    GameObject pauseUI;
+    GameObject resultUI;
 
     [SerializeField]
     Gauss gauss;
@@ -25,22 +25,27 @@ public class TitleController : SingletonMonoBehaviour<TitleController> {
             isStart = value;
         }
     }
-
-    void Update()
-    {
+    
+	void Update () {
         var deltaTime = Time.deltaTime;
-        
-        if (!isStart)
+
+        if (isStart)
         {
-            pauseUI.SetActive(true);
+            resultUI.SetActive(true);
             intencity += deltaTime * 8;
         }
         else
         {
-            pauseUI.SetActive(false);
+            resultUI.SetActive(false);
             intencity -= deltaTime * 8;
         }
         intencity = Mathf.Clamp01(intencity);
         gauss.Resolution = (int)(intencity * 10);
     }
+
+    void TextChange(string text)
+    {
+        resultUI.GetComponent<Text>().text = text;
+    }
+
 }

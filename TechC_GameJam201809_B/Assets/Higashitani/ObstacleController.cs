@@ -9,6 +9,8 @@ public class ObstacleController : MonoBehaviour {
 
     GameController gc;
 
+    Transform spornPoint;
+
     // Use this for initialization
     void Start () {
 		gc = GameController.Instance;
@@ -26,21 +28,11 @@ public class ObstacleController : MonoBehaviour {
         {
             if (gc.sData.listObjects[i].spornNum == gc.legsCount)
             {
+                if (gc.sData.listObjects[i].isSporn) return;
                 GameObject gameObject = instanceObjects[(int)(gc.sData.listObjects[i].height)];
-                //switch (gc.sData.listObjects[i].height)
-                //{
-                //    case ObjectData.Height.LONG:
-                //        gameObject = instanceObjects[0];
-                //        return;
-                //    case ObjectData.Height.MIDLE:
-                //        gameObject = instanceObjects[1];
-                //        return;
-                //    case ObjectData.Height.SHORT:
-                //        gameObject = instanceObjects[2];
-                //        return;
-                //}
                 var o = Instantiate(gameObject);
                 fieldsObjects.Add(o);
+                gc.sData.listObjects[i].isSporn = true;
             }
         }
     }

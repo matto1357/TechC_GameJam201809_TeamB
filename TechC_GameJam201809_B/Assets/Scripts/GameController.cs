@@ -13,14 +13,16 @@ public class GameController : SingletonMonoBehaviour<GameController>
     [SerializeField]
     public StageData sData;
 
-    enum gameState                          //ゲームの状態がどこにいるか
+    bool[] isStanby = new bool[2];
+
+    enum GameState                          //ゲームの状態がどこにいるか
     {
         Title = 0,
         Game,
         Result
     }
-
-    private gameState _gameState = 0;       //いーなむ
+    [SerializeField]
+    private GameState _gameState = 0;       //いーなむ
 
 	// Use this for initialization
 	void Start ()
@@ -31,7 +33,28 @@ public class GameController : SingletonMonoBehaviour<GameController>
 	// Update is called once per frame
 	void Update ()
     {
-        TimeLapse();
+        // テストコード
+        if (Input.GetKeyDown(KeyCode.Q)) isStanby[0] = true;
+        if (Input.GetKeyDown(KeyCode.W)) isStanby[1] = true;
+
+        switch (_gameState)
+        {
+            case GameState.Title:
+                if (isStanby[0] && isStanby[1])
+                {
+                    TitleController.Instance.IsStart = true;
+                    _gameState = GameState.Game;
+                }
+                return;
+
+            case GameState.Game:
+                TimeLapse();
+                return;
+
+            case GameState.Result:
+                return;
+
+        }
 	}
 
     private void TimeLapse()                //タイム経過させる
@@ -56,4 +79,22 @@ public class GameController : SingletonMonoBehaviour<GameController>
             score = 0;
         }
     }
+
+    public void GameOver()
+    {
+
+        
+    }
+
+    public void GameClear()
+    {
+
+    }
+
+    void Result()
+    {
+        _gameState = GameState.Result;
+        ResultController.Instance.IsStart = true;
+    }
+
 }
