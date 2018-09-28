@@ -2,8 +2,6 @@
 	Properties{
 		_Color("Color", Color) = (1,1,1,1)
 		_MainTex("Albedo (RGB)", 2D) = "white" {}
-		_Glossiness("Smoothness", Range(0,1)) = 0.5
-		_Metallic("Metallic", Range(0,1)) = 0.0
 		_Power("Power", Float) = 10.0
 		_Speed("Speed", Float) = 3.0
         _Offset("Offset", Float) = 0
@@ -38,7 +36,7 @@
 		}
 
 		void surf(Input IN, inout SurfaceOutput o) {
-			fixed4 c = tex2D(_MainTex, IN.uv_MainTex);
+			fixed4 c = tex2D(_MainTex, IN.uv_MainTex)* _Color;
 			o.Emission = c.rgb;
 			o.Alpha = c.a;
 		}
