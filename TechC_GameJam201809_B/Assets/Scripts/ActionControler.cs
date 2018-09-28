@@ -15,6 +15,7 @@ public class ActionControler : MonoBehaviour {
     [SerializeField]private GameObject instancePosObj;
     private GameObject obj;
 
+    [SerializeField] float betweenPos;
     private bool isPlay = true;
 
     private void Start()
@@ -86,7 +87,7 @@ public class ActionControler : MonoBehaviour {
         while (true)
         {
             if (/*isPlay*/!isPlay) break;
-            if(instancePosObj.transform.position.x - obj.transform.position.x >= 5)
+            if(instancePosObj.transform.position.x - obj.transform.position.x >= betweenPos)
             {
 
                 InstanceLegObject();
