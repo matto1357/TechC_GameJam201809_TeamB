@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+public class GameController : SingletonMonoBehaviour<GameController>
 {
     //変数エリア
     private float gameTime = 120f;          //ゲーム残り時間
     private int score = 0;                  //スコア
+    public int legsCount = 0;               //現在の足の本数
+    [SerializeField]
+    public float speed;                     //ゲームスピード
+    [SerializeField]
+    StageData sData;
 
     enum gameState                          //ゲームの状態がどこにいるか
     {
