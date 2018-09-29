@@ -20,6 +20,8 @@ public class ObjectCol : MonoBehaviour {
             Destroy(other.GetComponent<Animator>());
             other.GetComponent<SphereCollider>().isTrigger = false;
             other.GetComponent<Rigidbody>().useGravity = true;
+            Debug.Log(other.GetComponentInChildren<MeshRenderer>());
+            other.GetComponentInChildren<MeshRenderer>().material.SetColor("_Color", Color.red);
         }
     }
 }
