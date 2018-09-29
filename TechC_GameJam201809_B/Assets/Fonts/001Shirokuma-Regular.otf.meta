@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 2b3c339e1d890114b91c6ee0f9e15abb
+timeCreated: 1538189777
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: 001Shirokuma
+  fontNames:
+  - 001Shirokuma
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

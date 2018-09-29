@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : SingletonMonoBehaviour<GameController>
 {
@@ -14,10 +15,12 @@ public class GameController : SingletonMonoBehaviour<GameController>
     [SerializeField]
     public StageData sData;
 
-	public Transform p1Plate, p2Plate;
-	public Transform p1Cover, p2Cover;
+    public Transform p1Plate, p2Plate;
+    public Transform p1Cover, p2Cover;
 
     bool[] isStanby = new bool[2];
+    [SerializeField]
+    Text text;
 
     public enum GameState                          //ゲームの状態がどこにいるか
     {
@@ -31,11 +34,11 @@ public class GameController : SingletonMonoBehaviour<GameController>
 	// Use this for initialization
 	void Start ()
     {
-		p1Plate.gameObject.SetActive (true);
-		p2Plate.gameObject.SetActive (true);
-		p1Cover.gameObject.SetActive (true);
-		p2Cover.gameObject.SetActive (true);
-	}
+        p1Plate.gameObject.SetActive(true);
+        p2Plate.gameObject.SetActive(true);
+        p1Cover.gameObject.SetActive(true);
+        p2Cover.gameObject.SetActive(true);
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -43,29 +46,29 @@ public class GameController : SingletonMonoBehaviour<GameController>
         speed = 2.9f *Time.deltaTime;
 
         // テストコード
-		if (Input.GetKeyDown (KeyCode.S)) 
-		{
-			isStanby [0] = true;
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            isStanby[0] = true;
 
-			p1Cover.Rotate(new Vector3(0, 0, 1) * 50);
-		}
-		if (Input.GetKeyDown(KeyCode.RightArrow))
-		{
-			isStanby[1] = true;
-			p2Cover.Rotate(new Vector3(0, 0, -1) * 50);
-		}
-			
+            p1Cover.Rotate(new Vector3(0, 0, 1) * 50);
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            isStanby[1] = true;
+            p2Cover.Rotate(new Vector3(0, 0, -1) * 50);
+        }
         switch (_gameState)
         {
             case GameState.Title:
                 if (isStanby[0] && isStanby[1])
                 {
-					StartCoroutine (WaitFor (1));
+                    StartCoroutine(WaitFor(1));
                 }
                 return;
 
             case GameState.Game:
                 TimeLapse();
+                ViewScore();
                 return;
 
             case GameState.Result:
@@ -87,8 +90,12 @@ public class GameController : SingletonMonoBehaviour<GameController>
         gameTime -= Time.deltaTime;
         if (gameTime <= 0)
         {
-            //ゲーム終了処理
+            //
         }
+    }
+    private void ViewScore()
+    {
+        text.text = legsCount.ToString();
     }
 
     public void AddLeg(int value = 1)     //スコア加算
@@ -118,17 +125,17 @@ public class GameController : SingletonMonoBehaviour<GameController>
         ResultController.Instance.TextChange(text);
     }
 
-	IEnumerator WaitFor(float duration)
-	{
-		yield return new WaitForSeconds (duration);
+    IEnumerator WaitFor(float duration)
+    {
+        yield return new WaitForSeconds(duration);
 
-		TitleController.Instance.IsStart = true;
-		_gameState = GameState.Game;
+        TitleController.Instance.IsStart = true;
+        _gameState = GameState.Game;
 
-		p1Cover.gameObject.SetActive (false);
-		p2Cover.gameObject.SetActive (false);
+        p1Cover.gameObject.SetActive(false);
+        p2Cover.gameObject.SetActive(false);
 
-		p1Plate.gameObject.SetActive (false);
-		p2Plate.gameObject.SetActive (false);
-	}
+        p1Plate.gameObject.SetActive(false);
+        p2Plate.gameObject.SetActive(false);
+    }
 }
