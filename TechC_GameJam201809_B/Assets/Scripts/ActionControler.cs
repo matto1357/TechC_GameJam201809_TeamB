@@ -35,11 +35,9 @@ public class ActionControler : MonoBehaviour {
     }
     private void Update()
     {
-     
-        
         if (Input.GetMouseButtonDown(0))
         {
-            //isPlay = false;
+            isPlay = false;
         }
         
     }
@@ -51,13 +49,11 @@ public class ActionControler : MonoBehaviour {
         Vector3 textPos = pos;
         textPos.y = textPos.y + 3f;
         GameObject textObj = null;
-        Quaternion rot;
         switch (rnd)
         {
             case 0:
                 obj = Instantiate(octopus, pos, Quaternion.identity) as GameObject;
-                rot = obj.transform.rotation;
-                obj.transform.rotation = Quaternion.Euler(rot.x, 100, rot.z);
+                //obj.transform.rotation = Quaternion.Euler();
                 octopusLeg.Add(obj);
                 if (GameController.Instance.legsCount >= TextDeleteLegCount) break;
                 textObj = Instantiate(OctopusText, textPos, Quaternion.identity);
@@ -65,8 +61,6 @@ public class ActionControler : MonoBehaviour {
                 break;
             case 1:
                 obj = Instantiate(killerWhale, pos, Quaternion.identity) as GameObject;
-                rot = obj.transform.rotation;
-                obj.transform.rotation = Quaternion.Euler(rot.x, 100, rot.z);
                 killerWhaleTailFin.Add(obj);
                 if (GameController.Instance.legsCount >= TextDeleteLegCount) break;
                 textObj = Instantiate(KillerWhaleText, textPos, Quaternion.identity);
@@ -96,7 +90,6 @@ public class ActionControler : MonoBehaviour {
 
     public void InstenceWall()
     {
-        
         if (GameController.Instance.legsCount % 5 != 0) return;
         int rnd = Random.Range(0, 2);
         Vector3 textPos = pos;

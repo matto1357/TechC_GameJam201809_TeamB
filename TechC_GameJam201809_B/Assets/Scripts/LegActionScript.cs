@@ -2,40 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LegActionScript : MonoBehaviour
+public class LegActionScript : SingletonMonoBehaviour<LegActionScript>
 {
     [SerializeField]
-    ActionControler acc;
+    LegInstance li;
 
-    private void Update()
+    private void Start()
     {
-        if(Input.GetKeyDown("space"))
-        {
-            MoveLeg(0);
-        }
+        li = LegInstance.Instance;
     }
-    
-    
 
     //コントローラーのボタンが押されたら発動、コントローラーのIDを見て判断
-    public void MoveLeg(int controllerID)
+    public void MoveLeg(int controllerID, ActionPower ap)
     {
         List<GameObject> targetObj = new List<GameObject>();
         switch(controllerID)
         {
             //たこ
             case 0:
-                targetObj = acc.octopusLeg;
+                targetObj = li.octopusLegList;
                 break;
             //シャチ
             case 1:
-                targetObj = acc.killerWhaleTailFin;
+                targetObj = li.killerWhaleTailFinList;
                 break;
         }
         for(int i = 0; i < targetObj.Count; i++)
         {
-            Debug.Log("a");
-            targetObj[i].GetComponent<Animator>().SetTrigger("Up");
+            //動き
+            Debug.Log("aaa");
         }
     }
 }
