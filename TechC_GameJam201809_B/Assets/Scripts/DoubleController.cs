@@ -259,6 +259,7 @@ public class DoubleController : MonoBehaviour
 			if (mJumpPress == JumpPress.UP) jumpVal = upJump;
 			else if (mJumpPress == JumpPress.DOWN) jumpVal = downJump;
 
+            mRigidbody.velocity = Vector3.zero;
 			mRigidbody.AddForce(new Vector3(0, jumpVal, 0), ForceMode.Impulse);
 			mJumpPress = JumpPress.NONE;
 		}
@@ -266,7 +267,15 @@ public class DoubleController : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.tag == "P1_Tentacle") mIsP1Hit = true;
-		else if (other.tag == "P2_Tentacle") mIsP2Hit = true;
+        if (other.tag == "Octopus")
+        {
+            mIsP1Hit = true;
+            Debug.Log("オクトパス");
+        }
+        else if (other.tag == "KillerWhale")
+        {
+            mIsP2Hit = true;
+            Debug.Log("シャチ");
+        }
 	}
 }

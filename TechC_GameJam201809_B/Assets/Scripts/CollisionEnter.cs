@@ -17,6 +17,5 @@ public class CollisionEnter : MonoBehaviour {
     private void OnTriggerStay(Collider other)
     {
         Debug.Log("OK!");
-        
     }
 }

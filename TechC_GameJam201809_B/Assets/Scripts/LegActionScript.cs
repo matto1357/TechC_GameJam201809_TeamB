@@ -34,6 +34,7 @@ public class LegActionScript : MonoBehaviour
         }
         for(int i = 0; i < targetObj.Count; i++)
         {
+            Debug.Log("a");
             targetObj[i].GetComponent<Animator>().SetTrigger("Up");
         }
     }

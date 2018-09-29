@@ -39,7 +39,7 @@ public class ActionControler : MonoBehaviour {
         
         if (Input.GetMouseButtonDown(0))
         {
-            isPlay = false;
+            //isPlay = false;
         }
         
     }
