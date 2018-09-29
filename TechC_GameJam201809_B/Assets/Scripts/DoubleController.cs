@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DoubleController : MonoBehaviour 
 {
-	Rigidbody mRigidbody;
+	Rigidbody2D mRigidbody;
 	float mMovingTime;
 	bool mIsHit = false;
     [SerializeField]
@@ -52,7 +52,7 @@ public class DoubleController : MonoBehaviour
 
 	void Start()
 	{
-		mRigidbody = gameObject.GetComponent<Rigidbody> ();
+		mRigidbody = gameObject.GetComponent<Rigidbody2D> ();
 		//mParabolaController = GetComponent<ParabolaController> ();
         legScript = GetComponent<LegActionScript>();
 	}
@@ -69,30 +69,30 @@ public class DoubleController : MonoBehaviour
 		float horizontalDpadP1 = Input.GetAxis ("HorizontalDPadXBoxP1");
 		float verticalDpadP1 = Input.GetAxis ("VerticalDpadXBoxP1");
 
-		if (mIsP1Hit) 
-		{
-			if ( (verticalDpadP1 > 0　|| Input.GetKey(Joystick1upArrow)) && (Input.GetKeyDown (Joystick1Button1) || Input.GetKeyDown (Joystick1Space)) ) 
-			{
-				// 上　+　Aボタン
-				mIsP1Hit = false;
-				mJumpPress = JumpPress.UP;
-				Debug.Log ("up A button");
-			}
-			else if ( (verticalDpadP1 < 0 || Input.GetKey(Joystick1DownArrow)) && (Input.GetKeyDown (Joystick1Button1) || Input.GetKeyDown (Joystick1Space)) ) 
-			{
-				// 下　+　Aボタン
-				mIsP1Hit = false;
-				mJumpPress = JumpPress.DOWN;
-				Debug.Log ("down A button");
-			}
-			else if (Input.GetKeyDown(Joystick1Button1) || Input.GetKeyDown(Joystick1Space)) 
-			{
-				// Aボタン
-				mIsP1Hit = false;
-				mJumpPress = JumpPress.NORMAL;
-				Debug.Log ("P1 Button A");
-			}
-		}
+//		if (mIsP1Hit) 
+//		{
+//			if ( (verticalDpadP1 > 0　|| Input.GetKey(Joystick1upArrow)) && (Input.GetKeyDown (Joystick1Button1) || Input.GetKeyDown (Joystick1Space)) ) 
+//			{
+//				// 上　+　Aボタン
+//				mIsP1Hit = false;
+//				mJumpPress = JumpPress.UP;
+//				Debug.Log ("up A button");
+//			}
+//			else if ( (verticalDpadP1 < 0 || Input.GetKey(Joystick1DownArrow)) && (Input.GetKeyDown (Joystick1Button1) || Input.GetKeyDown (Joystick1Space)) ) 
+//			{
+//				// 下　+　Aボタン
+//				mIsP1Hit = false;
+//				mJumpPress = JumpPress.DOWN;
+//				Debug.Log ("down A button");
+//			}
+//			else if (Input.GetKeyDown(Joystick1Button1) || Input.GetKeyDown(Joystick1Space)) 
+//			{
+//				// Aボタン
+//				mIsP1Hit = false;
+//				mJumpPress = JumpPress.NORMAL;
+//				Debug.Log ("P1 Button A");
+//			}
+//		}
         
 		// 下に行く
 		if (verticalP1 > 0 || verticalDpadP1 < 0) 
@@ -129,12 +129,33 @@ public class DoubleController : MonoBehaviour
 		float horizontalDpadP2 = Input.GetAxis ("HorizontalDPadXBoxP2");
 		float verticalDpadP2 = Input.GetAxis ("VerticalDpadXBoxP2");
 
-		if (mIsP2Hit) 
-		{
-			Debug.Log ("P2 下");
-		}
+//		if (mIsP2Hit) 
+//		{
+//			if ( (verticalDpadP2 > 0　|| Input.GetKey(Joystick2upArrow)) && (Input.GetKeyDown (Joystick2Button0) || Input.GetKeyDown (Joystick2KeypadEnter)) )
+//			{
+//				// 上　+　Aボタン
+//				mIsP2Hit = false;
+//				mJumpPress = JumpPress.UP;
+//				Debug.Log ("up A button");
+//			}
+//			else if ( (verticalDpadP2 < 0 || Input.GetKey(Joystick2DownArrow)) &&  (Input.GetKeyDown (Joystick2Button0) || Input.GetKeyDown (Joystick2KeypadEnter)) )
+//			{
+//				// 下　+　Aボタン
+//				mIsP2Hit = false;
+//				mJumpPress = JumpPress.DOWN;
+//				Debug.Log ("down A button");
+//			}
+//			else if (Input.GetKeyDown(Joystick2Button0) || Input.GetKeyDown(Joystick2KeypadEnter)) 
+//			{
+//				mIsP2Hit = false;
+//				mJumpPress = JumpPress.NORMAL;
+//				Debug.Log ("P2 Button A");
+//			}
+//			Debug.Log ("P2 下");
+//		}
+
 		//　上に行く
-		else if (verticalP2 < 0 || verticalDpadP2 > 0) 
+		if (verticalP2 < 0 || verticalDpadP2 > 0) 
 		{
 			Debug.Log ("P2 上");
 		}
@@ -148,53 +169,10 @@ public class DoubleController : MonoBehaviour
             Debug.Log("P2 Button 2");
             legScript.MoveLeg(1);
         }
-
-        if (Input.GetKeyDown (KeyCode.Space)) 
-		{
-			//mParabolaController.SetNewParabola ();
-			//mParabolaController.FollowParabola ();
-		}
-        
-		if (mIsHit) 
-		{
-//			Debug.Log ("AAA");
-//
-//			mMovingTime += Time.deltaTime;
-//			mMovingTime = mMovingTime % 3.0f;
-//
-//			transform.position = MathParabola.Parabola (mInitialPos, transform.right * 1f, 4f, mMovingTime / 2.0f);
-//			Debug.Log (mMovingTime / 3.0f);
-//
-//			mIsHit = false;
-				//			mRigidbody.AddForce (new Vector3(0.5f, 0.5f, 0) * 800.0f);
-				//			mIsHit = false;
-			if ( (verticalDpadP2 > 0　|| Input.GetKey(Joystick2upArrow)) && (Input.GetKeyDown (Joystick2Button0) || Input.GetKeyDown (Joystick2KeypadEnter)) )
-			{
-				// 上　+　Aボタン
-				mIsP2Hit = false;
-				mJumpPress = JumpPress.UP;
-				Debug.Log ("up A button");
-			}
-			else if ( (verticalDpadP2 < 0 || Input.GetKey(Joystick2DownArrow)) &&  (Input.GetKeyDown (Joystick2Button0) || Input.GetKeyDown (Joystick2KeypadEnter)) )
-			{
-				// 下　+　Aボタン
-				mIsP2Hit = false;
-				mJumpPress = JumpPress.DOWN;
-				Debug.Log ("down A button");
-			}
-			else if (Input.GetKeyDown(Joystick2Button0) || Input.GetKeyDown(Joystick2KeypadEnter)) 
-			{
-				mIsP2Hit = false;
-				mJumpPress = JumpPress.NORMAL;
-				Debug.Log ("P2 Button A");
-			}
-            
-		}
-        
 	}
-    void Comand()
-    {
 
+	void Comand()
+    {
         if (mIsP1Hit)
         {
             //各コマンドボタンの処理
@@ -208,7 +186,6 @@ public class DoubleController : MonoBehaviour
 
             if (Input.GetKey(key1U) && Input.GetKeyDown(key1A))
             {
-
                 // 上　+　Aボタン
                 mIsP1Hit = false;
                 mJumpPress = JumpPress.UP;
@@ -217,37 +194,40 @@ public class DoubleController : MonoBehaviour
 
             if (Input.GetKey(key1D) && Input.GetKeyDown(key1A))
             {
-
                 // 下　+　Aボタン
                 mIsP1Hit = false;
                 mJumpPress = JumpPress.DOWN;
                 Debug.Log("key1D!");
             }
 
-            if (Input.GetKeyDown(key2A))
-            {
-                mIsP2Hit = false;
-                mJumpPress = JumpPress.NORMAL;
-                Debug.Log("key2A!");
-            }
 
-            if (Input.GetKey(key2U) && Input.GetKeyDown(key2A))
-            {
-                // 上　+　Aボタン
-                mIsP2Hit = false;
-                mJumpPress = JumpPress.UP;
-                Debug.Log("key2U!");
-            }
-
-            if (Input.GetKey(key2D) && Input.GetKeyDown(key2A))
-            {
-
-                // 下　+　Aボタン
-                mIsP2Hit = false;
-                mJumpPress = JumpPress.DOWN;
-                Debug.Log("key2D!");
-            }
         }
+		else if (mIsP2Hit)
+		{
+			if (Input.GetKeyDown(key2A))
+			{
+				mIsP2Hit = false;
+				mJumpPress = JumpPress.NORMAL;
+				Debug.Log("key2A!");
+			}
+
+			if (Input.GetKey(key2U) && Input.GetKeyDown(key2A))
+			{
+				// 上　+　Aボタン
+				mIsP2Hit = false;
+				mJumpPress = JumpPress.UP;
+				Debug.Log("key2U!");
+			}
+
+			if (Input.GetKey(key2D) && Input.GetKeyDown(key2A))
+			{
+
+				// 下　+　Aボタン
+				mIsP2Hit = false;
+				mJumpPress = JumpPress.DOWN;
+				Debug.Log("key2D!");
+			}
+		}
     }
 
     void FixedUpdate()
@@ -259,13 +239,13 @@ public class DoubleController : MonoBehaviour
 			if (mJumpPress == JumpPress.UP) jumpVal = upJump;
 			else if (mJumpPress == JumpPress.DOWN) jumpVal = downJump;
 
-            mRigidbody.velocity = Vector3.zero;
-			mRigidbody.AddForce(new Vector3(0, jumpVal, 0), ForceMode.Impulse);
+            mRigidbody.velocity = Vector2.zero;
+			mRigidbody.AddForce(new Vector2(0, jumpVal), ForceMode2D.Impulse);
 			mJumpPress = JumpPress.NONE;
 		}
 	}
 
-	void OnTriggerEnter(Collider other)
+	void OnTriggerEnter2D(Collider2D other)
 	{
         if (other.tag == "Octopus")
         {
