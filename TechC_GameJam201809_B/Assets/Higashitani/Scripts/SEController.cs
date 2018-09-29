@@ -6,7 +6,10 @@ using UnityEngine;
 public class SEController : SingletonMonoBehaviour<SEController> {
     public enum SETitle
     {
-        Sample,
+        punchMiddle2,
+        slime1,
+        diving,
+        water
     }
     [SerializeField]
     List<AudioClip> seClip = new List<AudioClip>();
