@@ -59,6 +59,7 @@ public class BallController : MonoBehaviour {
 
         if(Input.GetKeyDown(key1A) && isInArea1P)
         {
+            SEController.Instance.SEStart(SEController.SETitle.slime1);
             if (Input.GetKey(key1U))
             {
                 MoveLeg(0, ActionPower.Height);
@@ -78,6 +79,7 @@ public class BallController : MonoBehaviour {
 
         if (Input.GetKeyDown(key2A) && isInArea2P)
         {
+            SEController.Instance.SEStart(SEController.SETitle.punchMiddle2);
             if (Input.GetKey(key2U))
             {
                 MoveLeg(1, ActionPower.Height);
